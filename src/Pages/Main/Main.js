@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPokemonList } from '../../redux/modules/PokemonList';
+import { Link } from 'react-router-dom';
 
 function Main() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,14 +16,20 @@ function Main() {
   return (
     <>
       {pokemonPageList.map((pokemon) => (
-        <div key={pokemon.id}>
+        <Link
+          to={{
+            pathname: '/detail',
+            search: `?id=${pokemon.id}`,
+          }}
+          key={pokemon.id}
+        >
           <div key={pokemon.id}>{pokemon.name}</div>
 
           <img
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
             alt=""
           />
-        </div>
+        </Link>
       ))}
     </>
   );
