@@ -1,10 +1,13 @@
-import { configureStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import pokemonList from "./modules/pokemonList";
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
-const store = configureStore(
-  combineReducers({ pokemonList }),
-  applyMiddleware(thunk)
+import PokemonList from './modules/PokemonList';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  combineReducers({ PokemonList }),
+  composeEnhancers(applyMiddleware(thunk)),
 );
 
 export default store;
