@@ -7,15 +7,22 @@ function Main() {
   const dispatch = useDispatch();
 
   const storePokemonList = useSelector((state) => state.PokemonList);
-  const { pokemon_url } = storePokemonList;
+  const { pokemonPageList } = storePokemonList;
 
   useEffect(() => {
     dispatch(fetchPokemonList(currentPage));
   }, []);
   return (
     <>
-      {pokemon_url.map((pokemon) => (
-        <div key={pokemon}>{pokemon}</div>
+      {pokemonPageList.map((pokemon) => (
+        <div key={pokemon.id}>
+          <div key={pokemon.id}>{pokemon.name}</div>
+
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+            alt=""
+          />
+        </div>
       ))}
     </>
   );

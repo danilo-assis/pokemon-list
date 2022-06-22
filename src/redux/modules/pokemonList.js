@@ -1,14 +1,16 @@
+import getLastUrlPath from '../../Assets/util/js/getLastUrlPath';
+
 const ENDPOINT = 'https://pokeapi.co/api/v2/pokemon';
 const TOTAL_ITENS_PER_PAGE = 100;
 
 const types = {
-  SET_POKEMON_URL: 'pokemonList/SET_POKEMON_URL',
+  SET_POKEMON_PAGE_LIST: 'pokemonList/SET_POKEMON_PAGE_LIST',
   SET_CURRENT_PAGE: 'pokemonList/SET_CURRENT_PAGE',
   SET_TOTAL_PAGES: 'pokemonList/SET_TOTAL_PAGES',
 };
 
 const initialState = {
-  pokemon_url: [],
+  pokemonPageList: [],
   currentPage: 1,
   pokemonListLength: 0,
   totalPages: 0,
@@ -16,10 +18,10 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.SET_POKEMON_URL:
+    case types.SET_POKEMON_PAGE_LIST:
       return {
         ...state,
-        pokemon_url: action.pokemon_url,
+        pokemonPageList: action.pokemonPageList,
       };
     case types.SET_CURRENT_PAGE:
       return {
@@ -37,9 +39,9 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export const setUrl = (pokemon_url) => ({
-  type: types.SET_POKEMON_URL,
-  pokemon_url,
+export const setPokemonPageList = (pokemonPageList) => ({
+  type: types.SET_POKEMON_PAGE_LIST,
+  pokemonPageList,
 });
 
 export const setCurrentPage = (currentPage) => ({
@@ -64,7 +66,15 @@ export const fetchPokemonList = (currentPage) => (dispatch) => {
     .then((data) => {
       const { results } = data;
 
-      dispatch(setUrl(results.map((currentPokemon) => currentPokemon.url)));
+      dispatch(
+        setPokemonPageList(
+          results.map((currentPokemon) => ({
+            id: getLastUrlPath(currentPokemon.url),
+            name: currentPokemon.name,
+            url: currentPokemon.name,
+          })),
+        ),
+      );
     })
     .catch(() => {
       console.log('Error on fetch');
