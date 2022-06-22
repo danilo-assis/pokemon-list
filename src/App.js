@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import Container from "@mui/material/Container";
+import Container from '@mui/material/Container';
 
-import Main from "./Pages/Main/Main";
-import Detail from "./Pages/Detail/Detail";
-import Favorite from "./Pages/Favorite/Favorite";
-import Navbar from "./components/Navbar/Navbar";
+import Main from './Pages/Main/Main';
+import Detail from './Pages/Detail/Detail';
+import Favorite from './Pages/Favorite/Favorite';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
