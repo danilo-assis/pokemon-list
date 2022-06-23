@@ -88,6 +88,7 @@ export const fetchPokemonList = (currentPage) => (dispatch) => {
           })),
         ),
       );
+      dispatch(setTotalPages(Math.ceil(data.count / TOTAL_ITENS_PER_PAGE)));
     })
     .catch(() => {
       console.log('Error on fetch');
@@ -121,4 +122,5 @@ export const fetchPokemonDetail = (pokemonId) => (dispatch) => {
       console.log('Error on fetch');
     });
 };
+
 export default reducer;
