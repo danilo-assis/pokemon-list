@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { fetchPokemonDetail } from '../../redux/modules/PokemonList';
 import { addPokemonIdToFavorite } from '../../redux/modules/FavoriteList';
+import { Link } from 'react-router-dom';
 
 import placeholderImage from '../../Assets/img/pokemonLogo.png';
 
@@ -23,104 +24,122 @@ function Detail() {
   }, [id]);
 
   return (
-    <DetailContainer key={pokemonDetail.id}>
-      <PokemonHeader>
-        <PokemonImgContainer>
-          <PokemonImg
-            src={pokemonDetail.sprites}
-            alt={pokemonDetail.name}
-            onError={(event) => {
-              const { target } = event;
-              target.onError = null;
-              target.src = placeholderImage;
-            }}
-          />
-        </PokemonImgContainer>
-
-        <PokemonHeaderText>
-          <PokemonDetailName>N°:{pokemonDetail.id}</PokemonDetailName>
-          <PokemonDetailName>{pokemonDetail.name}</PokemonDetailName>
-        </PokemonHeaderText>
-
-        <Button
-          variant="contained"
-          onClick={() => dispatch(addPokemonIdToFavorite(id))}
+    <>
+      <LinkContainer>
+        <Link
+          to={{
+            pathname: '/',
+          }}
         >
-          Add to favorite
-        </Button>
-      </PokemonHeader>
-      <PokemonInfo>
-        <PhysicalDetailsContainer>
-          <PhysicalDetails>
-            <PhysicalDetailsItem>
-              <DetailTitle>
-                <p>
-                  <strong>Weight</strong>
-                </p>
-              </DetailTitle>
-              <p>{pokemonDetail.weight}kg</p>
-            </PhysicalDetailsItem>
-            <PhysicalDetailsItem>
-              <DetailTitle>
-                <p>
-                  <strong>Height</strong>
-                </p>
-              </DetailTitle>
-              <p>{pokemonDetail.height}m</p>
-            </PhysicalDetailsItem>
-          </PhysicalDetails>
-        </PhysicalDetailsContainer>
-        <DetailItem>
-          <DetailTitle>
-            <p>
-              <strong>Types</strong>
-            </p>
-          </DetailTitle>
-          <PokemonList>
-            {pokemonDetail.types?.map((type) => (
-              <ul>
-                <li>{type}</li>
-              </ul>
-            ))}
-          </PokemonList>
-        </DetailItem>
+          <Button variant="contained">Back to Home</Button>
+        </Link>
+      </LinkContainer>
+      <DetailContainer key={pokemonDetail.id}>
+        <PokemonHeader>
+          <PokemonImgContainer>
+            <PokemonImg
+              src={pokemonDetail.sprites}
+              alt={pokemonDetail.name}
+              onError={(event) => {
+                const { target } = event;
+                target.onError = null;
+                target.src = placeholderImage;
+              }}
+            />
+          </PokemonImgContainer>
 
-        <DetailItem>
-          <DetailTitle>
-            <p>
-              <strong>Abilities</strong>
-            </p>
-          </DetailTitle>
-          <PokemonList>
-            {pokemonDetail.abilities?.map((ability) => (
-              <ul>
-                <li>{ability}</li>
-              </ul>
-            ))}
-          </PokemonList>
-        </DetailItem>
+          <PokemonHeaderText>
+            <PokemonDetailName>N°:{pokemonDetail.id}</PokemonDetailName>
+            <PokemonDetailName>{pokemonDetail.name}</PokemonDetailName>
+          </PokemonHeaderText>
 
-        <DetailItem>
-          <DetailTitle>
-            <p>
-              <strong>Base Stats</strong>
-            </p>
-          </DetailTitle>
-          <PokemonList>
-            {pokemonDetail.stats?.map((stat) => (
-              <ul>
-                <li>
-                  <strong>{stat.name}</strong>
-                </li>
-                <li>{stat.base}</li>
-              </ul>
-            ))}
-          </PokemonList>
-        </DetailItem>
-      </PokemonInfo>
-    </DetailContainer>
+          <Button
+            variant="contained"
+            onClick={() => dispatch(addPokemonIdToFavorite(id))}
+          >
+            Add to favorite
+          </Button>
+        </PokemonHeader>
+        <PokemonInfo>
+          <PhysicalDetailsContainer>
+            <PhysicalDetails>
+              <PhysicalDetailsItem>
+                <DetailTitle>
+                  <p>
+                    <strong>Weight</strong>
+                  </p>
+                </DetailTitle>
+                <p>{pokemonDetail.weight}kg</p>
+              </PhysicalDetailsItem>
+              <PhysicalDetailsItem>
+                <DetailTitle>
+                  <p>
+                    <strong>Height</strong>
+                  </p>
+                </DetailTitle>
+                <p>{pokemonDetail.height}m</p>
+              </PhysicalDetailsItem>
+            </PhysicalDetails>
+          </PhysicalDetailsContainer>
+          <DetailItem>
+            <DetailTitle>
+              <p>
+                <strong>Types</strong>
+              </p>
+            </DetailTitle>
+            <PokemonList>
+              {pokemonDetail.types?.map((type) => (
+                <ul>
+                  <li>{type}</li>
+                </ul>
+              ))}
+            </PokemonList>
+          </DetailItem>
+
+          <DetailItem>
+            <DetailTitle>
+              <p>
+                <strong>Abilities</strong>
+              </p>
+            </DetailTitle>
+            <PokemonList>
+              {pokemonDetail.abilities?.map((ability) => (
+                <ul>
+                  <li>{ability}</li>
+                </ul>
+              ))}
+            </PokemonList>
+          </DetailItem>
+
+          <DetailItem>
+            <DetailTitle>
+              <p>
+                <strong>Base Stats</strong>
+              </p>
+            </DetailTitle>
+            <PokemonList>
+              {pokemonDetail.stats?.map((stat) => (
+                <ul>
+                  <li>
+                    <strong>{stat.name}</strong>
+                  </li>
+                  <li>{stat.base}</li>
+                </ul>
+              ))}
+            </PokemonList>
+          </DetailItem>
+        </PokemonInfo>
+      </DetailContainer>
+    </>
   );
 }
+
+const LinkContainer = styled.div`
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const DetailContainer = styled.div`
   margin: 20px;
