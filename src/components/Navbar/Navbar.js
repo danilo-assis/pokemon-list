@@ -10,6 +10,8 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Zoom from '@mui/material/Zoom';
 
+import { Link } from 'react-router-dom';
+
 import Logo from '../../Assets/img/pokemonLogo.png';
 
 const handleSrollTopClick = (event) => {
@@ -51,9 +53,11 @@ export default function Navbar(props) {
       <CssBaseline />
 
       <StyledAppBar>
-        <LogoContainer onClick={handleSrollTopClick}>
-          <LogoImg src={Logo} alt="Pokémon" />
-        </LogoContainer>
+        <a href="/">
+          <LogoContainer>
+            <LogoImg src={Logo} alt="Pokémon" />
+          </LogoContainer>
+        </a>
       </StyledAppBar>
 
       <Toolbar id="back-to-top-anchor" />
