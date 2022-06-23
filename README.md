@@ -1,11 +1,17 @@
 ## Description
 
-A React app that shows multiple Pokémon and allows to see their details and create a favorite list.  
+A React app that shows multiple Pokémon and allows to see their details and create a favorite list.
 
 ## Dependencies
 
 - [Node](https://nodejs.org/en/) 16.13.2
 - [npm](https://www.npmjs.com/get-npm) 8.1.2
+
+---
+
+## Demo
+
+https://danilo-pokemon-list.surge.sh
 
 ---
 
@@ -18,4 +24,5 @@ In the project directory, you can run:
 ### `npm start`
 
 ### `npm run build`
+
 ### `npm run test`
