@@ -188,7 +188,7 @@ const PokemonInfo = styled.div`
   flex-direction: column;
   border: 3px solid #000;
   border-radius: 0 5px 5px 0;
-  background-color: #e53935;
+  background-color: #4dd0e1;
 `;
 
 const DetailItem = styled.div`
