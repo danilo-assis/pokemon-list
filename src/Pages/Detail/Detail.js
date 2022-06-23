@@ -6,6 +6,8 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchPokemonDetail } from '../../redux/modules/PokemonList';
 import { addPokemonIdToFavorite } from '../../redux/modules/FavoriteList';
 
+import placeholderImage from '../../Assets/img/pokemonLogo.png';
+
 function Detail() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
@@ -17,13 +19,20 @@ function Detail() {
   useEffect(() => {
     dispatch(fetchPokemonDetail(id));
   }, [id]);
-  console.log('id', id);
 
   return (
     <DetailContainer key={pokemonDetail.id}>
       <PokemonHeader>
         <PokemonImgContainer>
-          <PokemonImg src={pokemonDetail.sprites} alt={pokemonDetail.name} />
+          <PokemonImg
+            src={pokemonDetail.sprites}
+            alt={pokemonDetail.name}
+            onError={(event) => {
+              const { target } = event;
+              target.onError = null;
+              target.src = placeholderImage;
+            }}
+          />
         </PokemonImgContainer>
 
         <PokemonHeaderText>

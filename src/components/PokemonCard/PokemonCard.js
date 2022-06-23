@@ -8,6 +8,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
+import placeholderImage from '../../Assets/img/pokemonLogo.png';
+
 export default function PokemonCard({ name, id }) {
   return (
     <StyledCard
@@ -47,6 +49,11 @@ export default function PokemonCard({ name, id }) {
         }}
         image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
         alt="Pokemon image"
+        onError={(event) => {
+          const { target } = event;
+          target.onError = null;
+          target.src = placeholderImage;
+        }}
       />
     </StyledCard>
   );
