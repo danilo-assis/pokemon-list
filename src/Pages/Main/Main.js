@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import slogan from '../../Assets/img/gottaCatchThemAll.png';
+
+import Button from '@mui/material/Button';
+
 function Main() {
   const dispatch = useDispatch();
 
@@ -22,9 +25,9 @@ function Main() {
   const pagination = () =>
     pages.map((_, i) => {
       return (
-        <button key={i} onClick={() => dispatch(fetchPokemonList(i + 1))}>
+        <Button key={i} onClick={() => dispatch(fetchPokemonList(i + 1))}>
           {i + 1}
-        </button>
+        </Button>
       );
     });
 
@@ -33,7 +36,21 @@ function Main() {
       <Slogan>
         <img src={slogan} alt="Pokemon slogan" />
       </Slogan>
-      {pagination()}
+
+      <CenteredButtons>
+        <StyledLink
+          to={{
+            pathname: '/favorite',
+          }}
+        >
+          <Button variant="contained">Favorites</Button>
+        </StyledLink>
+      </CenteredButtons>
+
+      <CenteredButtons>
+        <p>Pages</p>
+        <Pagination>{pagination()}</Pagination>
+      </CenteredButtons>
 
       <CardsContainer>
         {pokemonPageList.map((pokemon) => (
@@ -54,6 +71,23 @@ function Main() {
 
 const StyledLink = styled(Link)`
   margin-top: 80px;
+`;
+
+const CenteredButtons = styled.div`
+  margin: 30px auto;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 const CardsContainer = styled.div`
