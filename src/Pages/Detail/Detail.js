@@ -8,6 +8,8 @@ import { addPokemonIdToFavorite } from '../../redux/modules/FavoriteList';
 
 import placeholderImage from '../../Assets/img/pokemonLogo.png';
 
+import Button from '@mui/material/Button';
+
 function Detail() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
@@ -39,9 +41,13 @@ function Detail() {
           <PokemonDetailName>N°:{pokemonDetail.id}</PokemonDetailName>
           <PokemonDetailName>{pokemonDetail.name}</PokemonDetailName>
         </PokemonHeaderText>
-        <button onClick={() => dispatch(addPokemonIdToFavorite(id))}>
+
+        <Button
+          variant="contained"
+          onClick={() => dispatch(addPokemonIdToFavorite(id))}
+        >
           Add to favorite
-        </button>
+        </Button>
       </PokemonHeader>
       <PokemonInfo>
         <PhysicalDetailsContainer>
