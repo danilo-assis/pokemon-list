@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { fetchPokemonDetail } from '../../redux/modules/PokemonList';
+import { addPokemonIdToFavorite } from '../../redux/modules/FavoriteList';
 
 function Detail() {
   const [searchParams] = useSearchParams();
@@ -15,7 +16,8 @@ function Detail() {
 
   useEffect(() => {
     dispatch(fetchPokemonDetail(id));
-  }, []);
+  }, [id]);
+  console.log('id', id);
 
   return (
     <DetailContainer key={pokemonDetail.id}>
@@ -28,6 +30,9 @@ function Detail() {
           <PokemonDetailName>N°:{pokemonDetail.id}</PokemonDetailName>
           <PokemonDetailName>{pokemonDetail.name}</PokemonDetailName>
         </PokemonHeaderText>
+        <button onClick={() => dispatch(addPokemonIdToFavorite(id))}>
+          Add to favorite
+        </button>
       </PokemonHeader>
       <PokemonInfo>
         <PhysicalDetailsContainer>

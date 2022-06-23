@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -6,6 +6,8 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFavoriteFromStorage } from './redux/modules/FavoriteList';
 
 import Container from '@mui/material/Container';
 
@@ -15,6 +17,12 @@ import Favorite from './Pages/Favorite/Favorite';
 import Navbar from './components/Navbar/Navbar';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setFavoriteFromStorage());
+  }, []);
+
   return (
     <>
       <Navbar />
