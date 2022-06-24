@@ -65,6 +65,11 @@ function Main() {
           </StyledLink>
         ))}
       </CardsContainer>
+
+      <CenteredButtons>
+        <p>Pages</p>
+        <Pagination>{pagination()}</Pagination>
+      </CenteredButtons>
     </>
   );
 }
