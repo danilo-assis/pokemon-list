@@ -71,6 +71,10 @@ const StyledCard = styled(Card)`
   display: flex;
   align-items: center;
   flex-direction: column-reverse;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const ClickToDetail = styled.p`
