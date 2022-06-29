@@ -68,11 +68,11 @@ export const setPokemonDetail = (pokemonDetail) => ({
 });
 
 // API fetch
-export const fetchPokemonList = (currentPage) => (dispatch) => {
+export const fetchPokemonList = (page) => (dispatch) => {
   fetch(
     // Url with pagination parameters
     `${ENDPOINT}?limit=${TOTAL_ITENS_PER_PAGE}&offset=${
-      (currentPage - 1) * TOTAL_ITENS_PER_PAGE
+      (page - 1) * TOTAL_ITENS_PER_PAGE
     }`,
   )
     .then((response) => response.json())
@@ -88,7 +88,10 @@ export const fetchPokemonList = (currentPage) => (dispatch) => {
           })),
         ),
       );
+
       dispatch(setTotalPages(Math.ceil(data.count / TOTAL_ITENS_PER_PAGE)));
+
+      dispatch(setCurrentPage(page))
     })
     .catch(() => {
       console.log('Error on fetch');

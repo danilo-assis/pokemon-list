@@ -24,9 +24,15 @@ function Main() {
 
   const pagination = () =>
     pages.map((_, i) => {
+      const page = i + 1;
+
       return (
-        <Button key={i} onClick={() => dispatch(fetchPokemonList(i + 1))}>
-          {i + 1}
+        <Button
+          key={page}
+          disabled={currentPage === page}
+          onClick={() => dispatch(fetchPokemonList(page))}
+        >
+          {page}
         </Button>
       );
     });
